@@ -15,7 +15,8 @@ export const POSTS = [
 				user: {
 					username: "janedoe",
 					profileImg: "/avatars/girl1.png",
-					fullName: "Jane Doe",
+					fullName: "Koushik",
+		
 				},
 			},
 		],

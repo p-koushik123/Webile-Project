@@ -99,6 +99,8 @@ import { Toaster } from "react-hot-toast";
 import { useQuery } from "@tanstack/react-query";
 import LoadingSpinner from "./components/common/LoadingSpinner";
 import AdminLogin from "./pages/admin/adminlogin"
+// import AdminUserProfile from "./pages/admin/adminuserprofile"
+import UserProfile from "./pages/admin/userprofile"
 
 import AdminDashboard from "./pages/admin/admindash"
 
@@ -135,7 +137,7 @@ function App() {
 			<Routes>
 				{/* Public Routes */}
 				<Route path='/login' element={!authUser ? <LoginPage /> : <Navigate to='/' />} />
-				<Route path='/signup' element={!authUser ? <SignUpPage /> : <Navigate to='/' />} />
+				<Route path='/signup' element={!authUser ? <SignUpPage /> : <Navigate to='/login' />} />
 
 				{/* User Routes */}
 				<Route path='/' element={authUser ? <HomePage /> : <Navigate to='/login' />} />
@@ -143,9 +145,13 @@ function App() {
 				<Route path='/profile/:username' element={authUser ? <ProfilePage /> : <Navigate to='/login' />} />
 
 				{/* Admin Routes */}
-				<Route path="/admin/login" element={<AdminLogin />} />
-				<Route path="admin/dashboard" element={<AdminDashboard />} />
-               
+				{/* <Route path="/admin/login" element={<AdminLogin />} />
+				<Route path="admin/dashboard" element={<AdminDashboard />} /> */}
+				{/* <Route path='/admin' element={<AdminDashboard />} />
+				<Route path='/admin/users/:username' element={<AdminUserProfile />} /> */}
+				<Route path='/admin/login' element={<AdminLogin />} />
+        <Route path='/admin' element={<AdminDashboard />} />
+        <Route path='/admin/users/:username' element={<UserProfile />} />
 				
 			</Routes>
 			{authUser && <RightPanel />}

@@ -327,190 +327,699 @@
 /////////////////////
 
 
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { 
-  MdOutlineMail, 
-  MdPassword,
-  MdVisibility,
-  MdVisibilityOff
-} from 'react-icons/md';
-import { FaGoogle, FaFacebook, FaApple } from 'react-icons/fa';
-import toast from 'react-hot-toast';
-import PkLogo from '../../../components/svgs/PKLogo';
+// new -1
 
-// Placeholder for the actual logo component
-<PkLogo className="w-10" />
+// import React, { useState } from 'react';
+// import { Link } from 'react-router-dom';
+// import { useMutation, useQueryClient } from '@tanstack/react-query';
+// import { 
+//   MdOutlineMail, 
+//   MdPassword,
+//   MdVisibility,
+//   MdVisibilityOff
+// } from 'react-icons/md';
+// import { FaGoogle, FaFacebook, FaApple } from 'react-icons/fa';
+// import toast from 'react-hot-toast';
+// import PkLogo from '../../../components/svgs/PKLogo';
 
-const LoginPage = () => {
-  const [formData, setFormData] = useState({
-    username: '',
-    password: '',
-  });
-  const [showPassword, setShowPassword] = useState(false);
-  const queryClient = useQueryClient();
+// // Placeholder for the actual logo component
+// <PkLogo className="w-10" />
 
-  const {
-    mutate: loginMutation,
-    isPending,
-    isError,
-    error,
-  } = useMutation({
-    mutationFn: async ({ username, password }) => {
-      try {
-        const res = await fetch('/api/auth/login', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({ username, password }),
-        });
+// const LoginPage = () => {
+//   const [formData, setFormData] = useState({
+//     username: '',
+//     password: '',
+//   });
+//   const [showPassword, setShowPassword] = useState(false);
+//   const queryClient = useQueryClient();
 
-        const data = await res.json();
+//   const {
+//     mutate: loginMutation,
+//     isPending,
+//     isError,
+//     error,
+//   } = useMutation({
+//     mutationFn: async ({ username, password }) => {
+//       try {
+//         const res = await fetch('/api/auth/login', {
+//           method: 'POST',
+//           headers: {
+//             'Content-Type': 'application/json',
+//           },
+//           body: JSON.stringify({ username, password }),
+//         });
 
-        if (!res.ok) {
-          throw new Error(data.error || 'Something went wrong');
-        }
-        return data;
-      } catch (error) {
-        throw error;
-      }
-    },
-    onSuccess: () => {
-      toast.success('Successfully logged in!');
-      queryClient.invalidateQueries({ queryKey: ['authUser'] });
-    },
-  });
+//         const data = await res.json();
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    loginMutation(formData);
-  };
+//         if (!res.ok) {
+//           throw new Error(data.error || 'Something went wrong');
+//         }
+//         return data;
+//       } catch (error) {
+//         throw error;
+//       }
+//     },
+//     onSuccess: () => {
+//       toast.success('Successfully logged in!');
+//       queryClient.invalidateQueries({ queryKey: ['authUser'] });
+//     },
+//   });
 
-  const handleInputChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
+//   const handleSubmit = (e) => {
+//     e.preventDefault();
+//     loginMutation(formData);
+//   };
 
-  return (
-    <div className="fixed inset-0 w-full h-full overflow-hidden bg-gradient-to-r from-purple-500 via-pink-500 to-red-500 flex items-center justify-center px-4">
-      <div className="flex flex-col lg:flex-row w-[1200px] max-w-full items-center">
-        {/* Logo Section - Left Side */}
+//   const handleInputChange = (e) => {
+//     setFormData({ ...formData, [e.target.name]: e.target.value });
+//   };
+
+  
+
+//   return (
+//     <div className="fixed inset-0 w-full h-full overflow-hidden bg-gradient-to-r from-purple-500 via-pink-500 to-red-500 flex items-center justify-center px-4">
+//       <div className="flex flex-col lg:flex-row w-[1200px] max-w-full items-center">
+//         {/* Logo Section - Left Side */}
         
-        <div className="flex-1 hidden lg:flex items-center justify-center p-8 bg-gradient-to-r from-purple-500 via-indigo-600 to-blue-700">
-  <div className="bg-white/20 backdrop-blur-lg p-12 rounded-2xl shadow-lg transform hover:scale-[1.05] transition-all duration-500 ease-in-out">
-    {/* Logo Section */}
-    <div className="flex justify-center mb-8">
-      <PkLogo className="w-16 max-w-md" />
-    </div>
+//         <div className="flex-1 hidden lg:flex items-center justify-center p-8 bg-gradient-to-r from-purple-500 via-indigo-600 to-blue-700">
+//   <div className="bg-white/20 backdrop-blur-lg p-12 rounded-2xl shadow-lg transform hover:scale-[1.05] transition-all duration-500 ease-in-out">
+//     {/* Logo Section */}
+//     <div className="flex justify-center mb-8">
+//       <PkLogo className="w-16 max-w-md" />
+//     </div>
 
-    {/* Text Section */}
-    <div className="mt-8 text-white text-center space-y-4">
-      <h2 className="text-4xl font-extrabold mb-2">Welcome Back!</h2>
-      <p className="text-lg opacity-80">Sign in to continue your journey with us</p>
+//     {/* Text Section */}
+//     <div className="mt-8 text-white text-center space-y-4">
+//       <h2 className="text-4xl font-extrabold mb-2">Welcome Back!</h2>
+//       <p className="text-lg opacity-80">Sign in to continue your journey with us</p>
       
      
-    </div>
-  </div>
-</div>
+//     </div>
+//   </div>
+// </div>
 
 
-        {/* Login Form - Right Side */}
-        <div className="flex-1 w-full max-w-lg p-8">
-          <div className="bg-white p-8 md:p-12 rounded-3xl shadow-2xl transform hover:scale-[1.01] transition-all duration-300">
-            {/* Mobile Logo - Only visible on small screens */}
-            <div className="flex justify-center lg:hidden mb-8">
-              <PkLogo className="w-24" />
-            </div>
+//         {/* Login Form - Right Side */}
+//         <div className="flex-1 w-full max-w-lg p-8">
+//           <div className="bg-white p-8 md:p-12 rounded-3xl shadow-2xl transform hover:scale-[1.01] transition-all duration-300">
+//             {/* Mobile Logo - Only visible on small screens */}
+//             <div className="flex justify-center lg:hidden mb-8">
+//               <PkLogo className="w-24" />
+//             </div>
 
-            <h1 className="text-4xl font-extrabold text-gray-800 mb-6">Let's go.</h1>
-            <p className="text-gray-500 mb-8">Access your account and continue where you left off</p>
+//             <h1 className="text-4xl font-extrabold text-gray-800 mb-6">Let's go.</h1>
+//             <p className="text-gray-500 mb-8">Access your account and continue where you left off</p>
 
-            {/* Login Form */}
-            <form className="flex flex-col gap-6" onSubmit={handleSubmit}>
-              {/* Username/Email Field */}
-              <label className="input input-bordered rounded-full flex items-center gap-3 p-4 shadow-md bg-gray-50 focus-within:ring-2 focus-within:ring-purple-300 transition-all duration-200">
-                <MdOutlineMail className="text-xl text-gray-500" />
-                <input
-                  type="text"
-                  className="grow bg-transparent border-none outline-none placeholder-gray-400 text-gray-800"
-                  placeholder="Username or Email"
-                  name="username"
-                  onChange={handleInputChange}
-                  value={formData.username}
-                  required
-                  autoFocus
-                />
-              </label>
+//             {/* Login Form */}
+//             <form className="flex flex-col gap-6" onSubmit={handleSubmit}>
+//               {/* Username/Email Field */}
+//               <label className="input input-bordered rounded-full flex items-center gap-3 p-4 shadow-md bg-gray-50 focus-within:ring-2 focus-within:ring-purple-300 transition-all duration-200">
+//                 <MdOutlineMail className="text-xl text-gray-500" />
+//                 <input
+//                   type="text"
+//                   className="grow bg-transparent border-none outline-none placeholder-gray-400 text-gray-800"
+//                   placeholder="Username or Email"
+//                   name="username"
+//                   onChange={handleInputChange}
+//                   value={formData.username}
+//                   required
+//                   autoFocus
+//                 />
+//               </label>
 
-              {/* Password Field */}
-              <div className="space-y-2">
-                <label className="input input-bordered rounded-full flex items-center gap-3 p-4 shadow-md bg-gray-50 focus-within:ring-2 focus-within:ring-purple-300 transition-all duration-200">
-                  <MdPassword className="text-xl text-gray-500" />
-                  <input
-                    type={showPassword ? "text" : "password"}
-                    className="grow bg-transparent border-none outline-none placeholder-gray-400 text-gray-800"
-                    placeholder="Password"
-                    name="password"
-                    onChange={handleInputChange}
-                    value={formData.password}
-                    required
-                  />
-                  <button 
-                    type="button" 
-                    onClick={() => setShowPassword(!showPassword)}
-                    className="text-gray-500 focus:outline-none"
-                  >
-                    {showPassword ? <MdVisibilityOff className="text-xl" /> : <MdVisibility className="text-xl" />}
-                  </button>
-                </label>
-                <div className="flex justify-end">
-                  <Link to="/forgot-password" className="text-sm text-purple-600 hover:text-purple-800 hover:underline">
-                    Forgot password?
-                  </Link>
-                </div>
-              </div>
+//               {/* Password Field */}
+//               <div className="space-y-2">
+//                 <label className="input input-bordered rounded-full flex items-center gap-3 p-4 shadow-md bg-gray-50 focus-within:ring-2 focus-within:ring-purple-300 transition-all duration-200">
+//                   <MdPassword className="text-xl text-gray-500" />
+//                   <input
+//                     type={showPassword ? "text" : "password"}
+//                     className="grow bg-transparent border-none outline-none placeholder-gray-400 text-gray-800"
+//                     placeholder="Password"
+//                     name="password"
+//                     onChange={handleInputChange}
+//                     value={formData.password}
+//                     required
+//                   />
+//                   <button 
+//                     type="button" 
+//                     onClick={() => setShowPassword(!showPassword)}
+//                     className="text-gray-500 focus:outline-none"
+//                   >
+//                     {showPassword ? <MdVisibilityOff className="text-xl" /> : <MdVisibility className="text-xl" />}
+//                   </button>
+//                 </label>
+//                 <div className="flex justify-end">
+//                   <Link to="/forgot-password" className="text-sm text-purple-600 hover:text-purple-800 hover:underline">
+//                     Forgot password?
+//                   </Link>
+//                 </div>
+//               </div>
 
-              {/* Submit Button */}
-              <button 
-                className="btn rounded-full text-white py-3 mt-4 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 transition duration-300 transform hover:scale-[1.02] font-semibold shadow-lg"
-                disabled={isPending}
-              >
-                {isPending ? (
-                  <div className="flex items-center justify-center">
-                    <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin mr-2"></div>
-                    Logging in...
-                  </div>
-                ) : 'Sign in'}
-              </button>
+//               {/* Submit Button */}
+//               <button 
+//                 className="btn rounded-full text-white py-3 mt-4 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 transition duration-300 transform hover:scale-[1.02] font-semibold shadow-lg"
+//                 disabled={isPending}
+//               >
+//                 {isPending ? (
+//                   <div className="flex items-center justify-center">
+//                     <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin mr-2"></div>
+//                     Logging in...
+//                   </div>
+//                 ) : 'Sign in'}
+//               </button>
 
-              {/* Error Message */}
-              {isError && (
-                <div className="p-3 bg-red-50 rounded-lg border border-red-100">
-                  <p className="text-red-600 text-center text-sm">{error.message}</p>
-                </div>
-              )}
-            </form>
+//               {/* Error Message */}
+//               {isError && (
+//                 <div className="p-3 bg-red-50 rounded-lg border border-red-100">
+//                   <p className="text-red-600 text-center text-sm">{error.message}</p>
+//                 </div>
+//               )}
+//             </form>
 
-            {/* Social Login Options */}
-            <div className="flex justify-center space-x-4 mt-4">
-              {/* Social buttons omitted for brevity */}
-            </div>
+//             {/* Social Login Options */}
+//             <div className="flex justify-center space-x-4 mt-4">
+//               {/* Social buttons omitted for brevity */}
+//             </div>
 
-            {/* Sign Up Link */}
-            <div className="flex flex-col items-center mt-8">
-              <p className="text-gray-600">Don't have an account?</p>
-              <Link to="/signup" className="mt-2 w-full">
-                <button className="btn btn-outline rounded-full w-full py-3 border-2 border-purple-500 text-purple-600 hover:bg-purple-50 hover:text-purple-700 transition duration-300 font-semibold">
-                  Create an account
-                </button>
-              </Link>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
+//             {/* Sign Up Link */}
+//             <div className="flex flex-col items-center mt-8">
+//               <p className="text-gray-600">Don't have an account?</p>
+//               <Link to="/signup" className="mt-2 w-full">
+//                 <button className="btn btn-outline rounded-full w-full py-3 border-2 border-purple-500 text-purple-600 hover:bg-purple-50 hover:text-purple-700 transition duration-300 font-semibold">
+//                   Create an account
+//                 </button>
+//               </Link>
+//             </div>
+//           </div>
+//         </div>
+//       </div>
+//     </div>
+//   );
+// };
+
+// export default LoginPage;
+
+
+//recent 
+
+// import React, { useState } from 'react';
+// import { Link } from 'react-router-dom';
+// import { useMutation, useQueryClient } from '@tanstack/react-query';
+// import { 
+//   MdOutlineMail, 
+//   MdPassword, 
+//   MdVisibility, 
+//   MdVisibilityOff 
+// } from 'react-icons/md';
+// import toast from 'react-hot-toast';
+// import PkLogo from '../../../components/svgs/PKLogo';
+
+// const LoginPage = () => {
+//   const [formData, setFormData] = useState({ username: '', password: '' });
+//   const [showPassword, setShowPassword] = useState(false);
+//   const queryClient = useQueryClient();
+
+//   const { mutate: loginMutation, isPending, isError, error } = useMutation({
+//     mutationFn: async ({ username, password }) => {
+//       const res = await fetch('/api/auth/login', {
+//         method: 'POST',
+//         headers: { 'Content-Type': 'application/json' },
+//         body: JSON.stringify({ username, password }),
+//       });
+
+//       const data = await res.json();
+//       if (!res.ok) throw new Error(data.error || 'Something went wrong');
+//       return data;
+//     },
+//     onSuccess: () => {
+//       toast.success('Successfully logged in!');
+//       queryClient.invalidateQueries({ queryKey: ['authUser'] });
+//     },
+//   });
+
+//   const handleSubmit = (e) => {
+//     e.preventDefault();
+//     loginMutation(formData);
+//   };
+
+//   const handleInputChange = (e) => {
+//     setFormData({ ...formData, [e.target.name]: e.target.value });
+//   };
+
+//   return (
+//     <div className="fixed inset-0 w-full h-full flex items-center justify-center 
+//     bg-[url('/bg1.jpg')] bg-cover bg-center bg-no-repeat 
+//     bg-gradient-to-r from-purple-500 via-pink-500 to-red-500 px-4">
+//       <div className="bg-white/30 backdrop-blur-xl p-8 rounded-3xl shadow-2xl w-full max-w-lg border border-white/20">
+//         <div className="flex justify-center mb-8">
+//           <PkLogo className="w-16" />
+//         </div>
+//         <h1 className="text-4xl font-extrabold text-gray-800 mb-6">Let's go.</h1>
+//         <p className="text-gray-500 mb-8">Access your account and continue where you left off</p>
+//         <form className="flex flex-col gap-6" onSubmit={handleSubmit}>
+//           <label className="input input-bordered rounded-full flex items-center gap-3 p-4 shadow-md">
+//             <MdOutlineMail className="text-xl text-gray-500" />
+//             <input
+//               type="text"
+//               className="grow bg-transparent border-none outline-none placeholder-gray-400"
+//               placeholder="Username or Email"
+//               name="username"
+//               onChange={handleInputChange}
+//               value={formData.username}
+//               required
+//             />
+//           </label>
+//           <label className="input input-bordered rounded-full flex items-center gap-3 p-4 shadow-md">
+//             <MdPassword className="text-xl text-gray-500" />
+//             <input
+//               type={showPassword ? 'text' : 'password'}
+//               className="grow bg-transparent border-none outline-none placeholder-gray-400"
+//               placeholder="Password"
+//               name="password"
+//               onChange={handleInputChange}
+//               value={formData.password}
+//               required
+//             />
+//             <button 
+//               type="button" 
+//               onClick={() => setShowPassword(!showPassword)}
+//               className="text-gray-500 focus:outline-none"
+//             >
+//               {showPassword ? <MdVisibilityOff className="text-xl" /> : <MdVisibility className="text-xl" />}
+//             </button>
+//           </label>
+//           <button 
+//             className="btn rounded-full text-white py-3 bg-gradient-to-r from-purple-600 to-pink-600"
+//             disabled={isPending}
+//           >
+//             {isPending ? 'Logging in...' : 'Sign in'}
+//           </button>
+//           {isError && <p className="text-red-600 text-center">{error.message}</p>}
+//         </form>
+//         <p className="text-gray-600 mt-8 text-center">
+//           Don't have an account? <Link to="/signup" className="text-purple-600 hover:underline">Create an account</Link>
+//         </p>
+//       </div>
+//     </div>
+//   );
+// };
+
+// export default LoginPage;
+
+
+
+
+
+
+
+
+
+
+
+//new -recent -4
+
+
+
+
+// import React, { useState } from 'react';
+// import { Link, useNavigate } from 'react-router-dom';
+// import { useMutation, useQueryClient } from '@tanstack/react-query';
+// import { 
+//   MdOutlineMail, 
+//   MdPassword, 
+//   MdVisibility, 
+//   MdVisibilityOff 
+// } from 'react-icons/md';
+// import toast from 'react-hot-toast';
+// import PkLogo from '../../../components/svgs/PKLogo';
+
+// const LoginPage = () => {
+//   const [formData, setFormData] = useState({ username: '', password: '' });
+//   const [showPassword, setShowPassword] = useState(false);
+//   const queryClient = useQueryClient();
+//   const navigate = useNavigate();
+
+//   const { mutate: loginMutation, isPending, isError, error } = useMutation({
+//     mutationFn: async ({ username, password }) => {
+//       const res = await fetch('http://localhost:5000/api/auth/login', {
+//         method: 'POST',
+//         headers: { 'Content-Type': 'application/json' },
+//         body: JSON.stringify({ username, password }),
+//       });
+
+//       const data = await res.json();
+//       if (!res.ok) throw new Error(data.error || 'Invalid credentials');
+//       return data;
+//     },
+//     onSuccess: (data) => {
+//       toast.success('Successfully logged in!');
+//       // localStorage.setItem('token', data.token);
+//       queryClient.invalidateQueries({ queryKey: ['authUser'] });
+//       setTimeout(() => navigate('/'), 1500);
+//     },
+//     onError: (error) => {
+//       toast.error(error.message);
+//     },
+//   });
+
+//   const handleSubmit = (e) => {
+//     e.preventDefault();
+//     loginMutation(formData);
+//   };
+
+//   const handleInputChange = (e) => {
+//     setFormData({ ...formData, [e.target.name]: e.target.value });
+//   };
+
+//   return (
+//     <div className="fixed inset-0 flex items-center justify-center px-4 bg-cover bg-center bg-no-repeat bg-[url('/bg1.jpg')]">
+//       <div className="w-full max-w-lg p-8 bg-white/30 backdrop-blur-lg rounded-3xl shadow-xl border border-white/20 transition-all duration-300 hover:shadow-2xl">
+//         {/* Logo */}
+//         <div className="flex justify-center mb-6">
+//           <PkLogo className="w-16 h-16 animate-bounce" />
+//         </div>
+
+//         {/* Title */}
+//         <h1 className="text-3xl font-bold text-gray-800 text-center">Welcome Back</h1>
+//         <p className="text-gray-500 text-center mb-6">Sign in to continue</p>
+
+//         {/* Form */}
+//         <form className="flex flex-col gap-5" onSubmit={handleSubmit}>
+//           {/* Username / Email Input */}
+//           <label className="relative flex items-center gap-3 p-4 border border-gray-300 rounded-full shadow-md focus-within:ring-2 focus-within:ring-purple-500">
+//             <MdOutlineMail className="text-xl text-gray-500" />
+//             <input
+//               type="text"
+//               className="flex-1 bg-transparent border-none outline-none placeholder-gray-400"
+//               placeholder="Username or Email"
+//               name="username"
+//               onChange={handleInputChange}
+//               value={formData.username}
+//               required
+//             />
+//           </label>
+
+//           {/* Password Input */}
+//           <label className="relative flex items-center gap-3 p-4 border border-gray-300 rounded-full shadow-md focus-within:ring-2 focus-within:ring-purple-500">
+//             <MdPassword className="text-xl text-gray-500" />
+//             <input
+//               type={showPassword ? 'text' : 'password'}
+//               className="flex-1 bg-transparent border-none outline-none placeholder-gray-400"
+//               placeholder="Password"
+//               name="password"
+//               onChange={handleInputChange}
+//               value={formData.password}
+//               required
+//             />
+//             <button 
+//               type="button" 
+//               onClick={() => setShowPassword(!showPassword)}
+//               className="text-gray-500 hover:text-purple-600 transition"
+//             >
+//               {showPassword ? <MdVisibilityOff className="text-xl" /> : <MdVisibility className="text-xl" />}
+//             </button>
+//           </label>
+
+//           {/* Login Button */}
+//           <button
+//             type="submit"
+//             className="w-full py-3 text-white font-semibold rounded-full bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 transition-all duration-300 disabled:opacity-50"
+//             disabled={isPending}
+//           >
+//             {isPending ? 'Logging in...' : 'Sign in'}
+//           </button>
+
+//           {/* Error Message */}
+//           {isError && <p className="text-red-600 text-center">{error.message}</p>}
+//         </form>
+
+//         {/* Signup Link */}
+//         <p className="mt-6 text-center text-gray-600">
+//           Don't have an account? <Link to="/signup" className="text-purple-600 hover:underline">Create one</Link>
+//         </p>
+//       </div>
+//     </div>
+//   );
+// };
+
+// export default LoginPage;
+
+
+
+
+
+
+
+
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { MdOutlineMail, MdPassword, MdVisibility, MdVisibilityOff } from "react-icons/md";
+import toast from "react-hot-toast";
+import PkLogo from "./../../../components/svgs/PKLogo";
+
+const LoginPage = () => {
+	const [formData, setFormData] = useState({ username: "", password: "" });
+	const [showPassword, setShowPassword] = useState(false);
+	const queryClient = useQueryClient();
+	const navigate = useNavigate();
+
+	const { mutate: loginMutation, isPending, isError, error } = useMutation({
+		mutationFn: async ({ username, password }) => {
+			const res = await fetch("http://localhost:5000/api/auth/login", {
+				method: "POST",
+				headers: { "Content-Type": "application/json" },
+				body: JSON.stringify({ username, password }),
+				credentials: "include",
+			});
+
+			const data = await res.json();
+			if (!res.ok) throw new Error(data.error || "Invalid credentials");
+			return data;
+		},
+		onSuccess: (data) => {
+			toast.success("Successfully logged in!");
+			queryClient.invalidateQueries({ queryKey: ["authUser"] });
+			setTimeout(() => navigate("/"), 1500);
+		},
+		onError: (error) => {
+			toast.error(error.message);
+		},
+	});
+
+	const handleSubmit = (e) => {
+		e.preventDefault();
+		loginMutation(formData);
+	};
+
+	return (
+		<div className="fixed inset-0 flex items-center justify-center px-4 bg-cover bg-center bg-no-repeat bg-[url('/bg1.jpg')]">
+			<div className="w-full max-w-lg p-8 bg-white/30   shadow-xl border border-white/20">
+				{/* Logo */}
+				<div className="flex justify-center mb-6">
+					<PkLogo className="w-16 h-16 animate-bounce" />
+				</div>
+
+				{/* Title */}
+				<h1 className="text-3xl font-bold text-gray-800 text-center">Welcome Back</h1>
+				<p className="text-gray-500 text-center mb-6">Sign in to continue</p>
+
+				{/* Form */}
+				<form className="flex flex-col gap-5 p-6 bg-white/300 backdrop-blur-lg shadow-lg rounded-xl " onSubmit={handleSubmit}>
+					{/* Username / Email Input  flex items-center border rounded-lg p-3*/}
+
+    
+					<div className="relative flex items-center  border-gray-300 rounded-xl p-4  shadow-md transition-all 
+hover:border-purple-500 focus-within:border-purple-600 focus-within:shadow-lg">
+						<MdOutlineMail className="text-xl text-gray-600" />
+						<input
+							type="text"
+							className="flex-1 bg-transparent border-none text-black outline-none px-3"
+							placeholder="Username or Email"
+							name="username"
+							onChange={(e) => setFormData({ ...formData, username: e.target.value })}
+							value={formData.username}
+							required
+						/>
+					</div>
+
+					{/* Password Input */}
+					<div className="relative flex items-center  border-gray-300 rounded-xl p-4  shadow-md transition-all 
+hover:border-purple-500 focus-within:border-purple-600 focus-within:shadow-lg">
+						<MdPassword className="text-xl text-gray-500" />
+						<input
+							type={showPassword ? "text" : "password"}
+							className="flex-1 text-black bg-transparent border-none outline-none px-3"
+							placeholder="Password"
+							name="password"
+							onChange={(e) => setFormData({ ...formData, password: e.target.value })}
+							value={formData.password}
+							required
+						/>
+						<button type="button" onClick={() => setShowPassword(!showPassword)} className="text-gray-500">
+							{showPassword ? <MdVisibilityOff /> : <MdVisibility />}
+						</button>
+					</div>
+
+					{/* Login Button */}
+					<button
+						type="submit"
+						className="w-full py-3 text-white font-semibold rounded-full bg-gradient-to-r from-purple-600 to-blue-600"
+						disabled={isPending}
+					>
+						{isPending ? "Logging in..." : "Sign in"}
+					</button>
+
+					{/* Error Message */}
+					{isError && <p className="text-red-600 text-center">{error.message}</p>}
+				</form>
+
+				{/* Signup Link */}
+				<p className="mt-6 text-center text-gray-600">
+					Don't have an account? <Link to="/signup" className="text-purple-600 hover:text-green-700">Create one</Link>
+				</p>
+			</div>
+		</div>
+	);
 };
 
 export default LoginPage;
+
+
+
+
+
+
+
+//relative flex items-center border-2 border-gray-300 rounded-xl p-4 bg-white shadow-md transition-all 
+//hover:border-purple-500 focus-within:border-purple-600 focus-within:shadow-lg
+
+
+
+// new -2
+
+// import React, { useState } from 'react';
+// import { Link } from 'react-router-dom';
+// import { useMutation, useQueryClient } from '@tanstack/react-query';
+// import { 
+//   MdOutlineMail, 
+//   MdPassword,
+//   MdVisibility,
+//   MdVisibilityOff
+// } from 'react-icons/md';
+// import toast from 'react-hot-toast';
+// import PkLogo from '../../../components/svgs/PKLogo';
+
+// const LoginPage = () => {
+//   const [formData, setFormData] = useState({
+//     username: '',
+//     password: '',
+//   });
+//   const [showPassword, setShowPassword] = useState(false);
+//   const queryClient = useQueryClient();
+
+//   const {
+//     mutate: loginMutation,
+//     isPending,
+//     isError,
+//     error,
+//   } = useMutation({
+//     mutationFn: async ({ username, password }) => {
+//       // Check if user is admin
+//       if (username === 'admin' && password === 'admin123') {
+//         window.location.href = '/admin';
+//         return;
+//       }
+
+//       try {
+//         const res = await fetch('/api/auth/login', {
+//           method: 'POST',
+//           headers: {
+//             'Content-Type': 'application/json',
+//           },
+//           body: JSON.stringify({ username, password }),
+//         });
+
+//         const data = await res.json();
+
+//         if (!res.ok) {
+//           throw new Error(data.error || 'Something went wrong');
+//         }
+//         return data;
+//       } catch (error) {
+//         throw error;
+//       }
+//     },
+//     onSuccess: () => {
+//       toast.success('Successfully logged in!');
+//       queryClient.invalidateQueries({ queryKey: ['authUser'] });
+//       window.location.href = '/';
+//     },
+//   });
+
+//   const handleSubmit = (e) => {
+//     e.preventDefault();
+//     loginMutation(formData);
+//   };
+
+//   const handleInputChange = (e) => {
+//     setFormData({ ...formData, [e.target.name]: e.target.value });
+//   };
+
+//   return (
+//     <div className="fixed inset-0 w-full h-full flex items-center justify-center bg-gradient-to-r from-purple-500 via-pink-500 to-red-500 px-4">
+//       <div className="flex flex-col lg:flex-row w-[1200px] max-w-full items-center">
+//         {/* Logo Section */}
+//         <div className="flex-1 hidden lg:flex items-center justify-center p-8 bg-gradient-to-r from-purple-500 via-indigo-600 to-blue-700">
+//           <div className="bg-white/20 backdrop-blur-lg p-12 rounded-2xl shadow-lg">
+//             <div className="flex justify-center mb-8">
+//               <PkLogo className="w-16" />
+//             </div>
+//             <h2 className="text-4xl font-extrabold text-white mb-2">Welcome Back!</h2>
+//             <p className="text-lg text-white opacity-80">Sign in to continue your journey with us</p>
+//           </div>
+//         </div>
+
+//         {/* Login Form */}
+//         <div className="flex-1 w-full max-w-lg p-8">
+//           <div className="bg-white p-8 rounded-3xl shadow-2xl">
+//             <div className="flex justify-center lg:hidden mb-8">
+//               <PkLogo className="w-24" />
+//             </div>
+//             <h1 className="text-4xl font-extrabold text-gray-800 mb-6">Let's go.</h1>
+//             <p className="text-gray-500 mb-8">Access your account and continue where you left off</p>
+//             <form className="flex flex-col gap-6" onSubmit={handleSubmit}>
+//               <label className="input input-bordered rounded-full flex items-center gap-3 p-4 shadow-md bg-gray-50">
+//                 <MdOutlineMail className="text-xl text-gray-500" />
+//                 <input type="text" className="grow bg-transparent border-none outline-none" placeholder="Username or Email" name="username" onChange={handleInputChange} value={formData.username} required />
+//               </label>
+//               <label className="input input-bordered rounded-full flex items-center gap-3 p-4 shadow-md bg-gray-50">
+//                 <MdPassword className="text-xl text-gray-500" />
+//                 <input type={showPassword ? "text" : "password"} className="grow bg-transparent border-none outline-none" placeholder="Password" name="password" onChange={handleInputChange} value={formData.password} required />
+//                 <button type="button" onClick={() => setShowPassword(!showPassword)} className="text-gray-500">
+//                   {showPassword ? <MdVisibilityOff className="text-xl" /> : <MdVisibility className="text-xl" />}
+//                 </button>
+//               </label>
+//               <div className="flex justify-end">
+//                 <Link to="/forgot-password" className="text-sm text-purple-600 hover:underline">Forgot password?</Link>
+//               </div>
+//               <button className="btn rounded-full text-white py-3 mt-4 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700" disabled={isPending}>
+//                 {isPending ? 'Logging in...' : 'Sign in'}
+//               </button>
+//               {isError && <p className="text-red-600 text-center text-sm">{error.message}</p>}
+//             </form>
+//             <div className="flex flex-col items-center mt-8">
+//               <p className="text-gray-600">Don't have an account?</p>
+//               <Link to="/signup" className="mt-2 w-full">
+//                 <button className="btn btn-outline rounded-full w-full py-3 border-2 border-purple-500 text-purple-600">Create an account</button>
+//               </Link>
+//             </div>
+//           </div>
+//         </div>
+//       </div>
+//     </div>
+//   );
+// };
+
+// export default LoginPage;
+

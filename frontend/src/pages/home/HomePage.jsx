@@ -8,9 +8,9 @@ const HomePage = () => {
 
 	return (
 		<>
-			<div className='flex-[4_4_0] mr-auto min-h-screen 
-			my-1 mx-3
-			bg-gradient-to-br from-[#1e3a8a] via-[#3b82f6] to-[#60a5fa] p-6 rounded-2xl shadow-lg sticky top-2 text-white'>
+			<div className="flex-[4_4_0] mr-auto min-h-screen my-1 mx-3 
+    bg-[url('/bg1.jpg')] bg-cover bg-center bg-no-repeat 
+    rounded-2xl shadow-lg sticky top-2 text-white relative overflow-hidden">
 				{/* Header */}
 				<div className='flex w-full  border-gray-700'>
 					<div

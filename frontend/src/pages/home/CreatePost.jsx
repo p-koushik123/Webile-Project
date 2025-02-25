@@ -927,9 +927,10 @@ const CreatePost = () => {
   const handleTagClick = () => {
     setShowTagInput(!showTagInput);
   };
-
+//bg-white/30 backdrop-blur-lg shadow-2xl border border-white/20 rounded-2xl p-6 mx-auto mb-6 my-4 max-w-lg
+//bg-white shadow-lg rounded p-5 mx-auto mb-6 my-4
   return (
-    <div className="bg-white shadow-lg rounded p-5 mx-auto mb-6 my-4"> 
+    <div className="bg-white/30 backdrop-blur-lg shadow-2xl border border-white/20 rounded-2xl p-6 mx-auto mb-6 my-4 max-w-lg"> 
       <div className="flex gap-3 items-start">
         <img
           src={authUser?.profileImg || "/avatar-placeholder.png"}
@@ -960,7 +961,7 @@ const CreatePost = () => {
             </div>
           )}
 
-          <div className="flex justify-between items-center py-2 border">
+          <div className="flex justify-between items-center py-2 ">
             <div className="flex gap-4 items-center">
               <CiImageOn
                 className="text-gray-500 w-7 h-7 cursor-pointer hover:scale-110 transition"
@@ -989,11 +990,31 @@ const CreatePost = () => {
                 {visibility === "public" ? <FaGlobe /> : visibility === "friends" ? <FaUsers /> : <FaLock />} {visibility}
               </button>
               {showVisibilityOptions && (
-                <div className="absolute mt-2 w-32 bg-white border border-gray-300 rounded shadow-lg">
-                  <button onClick={() => { setVisibility("public"); setShowVisibilityOptions(false); }} className="block px-4 py-2 hover:bg-gray-200 w-full text-left">🌍 Public</button>
-                  <button onClick={() => { setVisibility("friends"); setShowVisibilityOptions(false); }} className="block px-4 py-2 hover:bg-gray-200 w-full text-left">👥 Friends</button>
-                  <button onClick={() => { setVisibility("private"); setShowVisibilityOptions(false); }} className="block px-4 py-2 hover:bg-gray-200 w-full text-left">🔒 Private</button>
-                </div>
+                // <div className="absolute mt-2 w-32 bg- border border-gray-300 rounded shadow-lg">
+                //   <button onClick={() => { setVisibility("public"); setShowVisibilityOptions(false); }} className="block px-4 py-2  w-full text-left">🌍 Public</button>
+                //   <button onClick={() => { setVisibility("friends"); setShowVisibilityOptions(false); }} className="block px-4 py-2  w-full text-left">👥 Friends</button>
+                //   <button onClick={() => { setVisibility("private"); setShowVisibilityOptions(false); }} className="block px-4 py-2  w-full text-left">🔒 Private</button>
+                // </div>
+                <div className="absolute mt-2 w-40 bg-white/30 backdrop-blur-md border border-white/20 rounded-xl shadow-xl overflow-hidden transition-all duration-300">
+  <button 
+    onClick={() => { setVisibility("public"); setShowVisibilityOptions(false); }} 
+    className="flex items-center gap-2 px-4 py-3 w-full text-left text-white hover:bg-white/20 transition duration-200">
+    🌍 <span className="font-medium">Public</span>
+  </button>
+
+  <button 
+    onClick={() => { setVisibility("friends"); setShowVisibilityOptions(false); }} 
+    className="flex items-center gap-2 px-4 py-3 w-full text-left text-white hover:bg-white/20 transition duration-200">
+    👥 <span className="font-medium">Friends</span>
+  </button>
+
+  <button 
+    onClick={() => { setVisibility("private"); setShowVisibilityOptions(false); }} 
+    className="flex items-center gap-2 px-4 py-3 w-full text-left text-white hover:bg-white/20 transition duration-200">
+    🔒 <span className="font-medium">Private</span>
+  </button>
+</div>
+
               )}
             </div>
             <button
